@@ -1,0 +1,32 @@
+.Field {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+
+	//width: 315px;
+	height: 75px;
+	border-radius: var(--medium-round);
+	padding: var(--medium-indent);
+	background-color: #fff;
+
+	box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1), 0px 4px 12px rgba(0, 0, 0, 0.05);
+
+	.label {
+		font: var(--font-body);
+	}
+
+	.fieldValue {
+		font-weight: 300;
+	}
+
+	.input {
+		font-weight: 300;
+		//height: var(--font-line-m);
+	}
+}
+
+.disabled {
+	cursor: not-allowed;
+	color: var(--mid-gray-bg-color);
+}

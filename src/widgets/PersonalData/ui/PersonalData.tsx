@@ -6,8 +6,8 @@ import { Avatar } from 'shared/ui';
 import s from './PersonalData.module.scss';
 
 export const PersonalData = memo(() => {
-	const [isFirstNameModalOpen, setIsFirstNameModalOpen] = useState(false);
-	const [isLastNameModalOpen, setIsLastNameModalOpen] = useState(false);
+	const [isNameModalOpen, setIsNameModalOpen] = useState(false);
+	const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
 
 	// TODO обработать
 	const { personalData, isLoading, error } = useGetPersonalData();
@@ -16,12 +16,12 @@ export const PersonalData = memo(() => {
 	const userAvatar =
 		'https://avatars.mds.yandex.net/i?id=29f7366ac823f46165612d9480e60f0e_l-13215132-images-thumbs&n=13';
 
-	const handleFirstNameModal = useCallback(() => {
-		setIsFirstNameModalOpen((prev) => !prev);
+	const handleNameModal = useCallback(() => {
+		setIsNameModalOpen((prev) => !prev);
 	}, []);
 
-	const handleLastNameModal = useCallback(() => {
-		setIsLastNameModalOpen((prev) => !prev);
+	const handleUsernameModal = useCallback(() => {
+		setIsUsernameModalOpen((prev) => !prev);
 	}, []);
 
 	return (
@@ -30,37 +30,28 @@ export const PersonalData = memo(() => {
 
 			<div className={s.fields}>
 				<AccountSettings.Field
-					label={'Имя'}
-					value={personalData.firstName}
-					onClick={handleFirstNameModal}
+					label={'Имя пользователя'}
+					value={personalData.username}
+					onClick={handleUsernameModal}
 				/>
 
 				<AccountSettings.Field
-					label={'Фамилия'}
-					value={personalData.firstName}
-					onClick={handleLastNameModal}
+					label={'Имя'}
+					value={`${personalData.firstName} ${personalData.lastName}`}
+					onClick={handleNameModal}
 				/>
 
-				<AccountSettings.Field label={'Почта'} value={'myemail@icloud.com'} disabled />
-
-				<AccountSettings.Field label={'Username'} value={personalData.username} disabled />
+				<AccountSettings.Field label={'Группа'} />
 			</div>
 
-			{isFirstNameModalOpen && (
-				<EditPersonalData.Modal
-					name={'firstName'}
-					label={'Имя'}
-					isOpen={isFirstNameModalOpen}
-					onClose={handleFirstNameModal}
-				/>
+			{isNameModalOpen && (
+				<EditPersonalData.NameModal isOpen={isNameModalOpen} onClose={handleNameModal} />
 			)}
 
-			{isLastNameModalOpen && (
-				<EditPersonalData.Modal
-					name={'firstName'}
-					label={'Фамилия'}
-					isOpen={isLastNameModalOpen}
-					onClose={handleLastNameModal}
+			{isUsernameModalOpen && (
+				<EditPersonalData.UsernameModal
+					isOpen={isUsernameModalOpen}
+					onClose={handleUsernameModal}
 				/>
 			)}
 		</div>

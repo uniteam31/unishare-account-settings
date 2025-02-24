@@ -1,27 +1,24 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import type { TPersonalDataField } from 'entities/PersonalData';
+import type { TUsernameFormFields } from 'entities/PersonalData';
 import { FormWrapper } from 'shared/lib';
 import { ModalUI } from 'shared/ui';
-import { Form } from '../Form/Form';
+import { UsernameForm } from '../UsernameForm/UsernameForm';
 
 interface IModalProps {
-	name: TPersonalDataField;
-	label: string;
-	//
 	isOpen: boolean;
 	onClose: () => void;
 }
 
-export const Modal = (props: IModalProps) => {
-	const { name, label, isOpen, onClose } = props;
+export const UsernameModal = (props: IModalProps) => {
+	const { isOpen, onClose } = props;
 
-	const methods = useForm();
+	const methods = useForm<TUsernameFormFields>();
 
 	return (
 		<ModalUI isOpen={isOpen} onClose={onClose}>
 			<FormWrapper methods={methods}>
-				<Form name={name} label={label} />
+				<UsernameForm />
 			</FormWrapper>
 		</ModalUI>
 	);

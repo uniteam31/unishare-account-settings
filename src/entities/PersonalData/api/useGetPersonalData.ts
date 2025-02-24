@@ -6,6 +6,7 @@ import type { IPersonalData } from '../model/personalData';
 
 const DEFAULT_PERSONAL_DATA_VALUES: IPersonalData = {
 	firstName: '',
+	lastName: '',
 	avatar: '',
 	username: '',
 };

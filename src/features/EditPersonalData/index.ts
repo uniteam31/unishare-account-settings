@@ -1,11 +1,14 @@
-import { Modal } from './ui/Modal/Modal';
+import { NameModal } from './ui/NameModal/NameModal';
+import { UsernameModal } from './ui/UsernameModal/UsernameModal';
 
 type TEditPersonalDataComponents = {
-	Modal: typeof Modal;
+	NameModal: typeof NameModal;
+	UsernameModal: typeof UsernameModal;
 };
 
 const EditPersonalData: TEditPersonalDataComponents = {
-	Modal,
+	NameModal,
+	UsernameModal,
 };
 
 export { EditPersonalData };

@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
-import type { IPersonalData, TPersonalDataField } from 'entities/PersonalData';
+import type { IPersonalData } from 'entities/PersonalData';
 import { axiosInstance } from 'shared/api';
 import { getApiResponseErrorMessage } from 'shared/lib';
 import type { ApiResponse } from 'shared/types';
 
 interface IUpdatePersonalDataProps {
-	name: TPersonalDataField;
-	value: string;
+	formValues: Partial<IPersonalData>;
 }
 
 type TUpdatePersonalDataResponse = ApiResponse<IPersonalData>;
@@ -16,7 +15,7 @@ export const useUpdatePersonalData = () => {
 	const [error, setError] = useState<null | string>();
 
 	const updatePersonalData = useCallback(async (props: IUpdatePersonalDataProps) => {
-		const { name, value } = props;
+		const { formValues } = props;
 
 		setIsLoading(true);
 		setError(null);
@@ -24,7 +23,7 @@ export const useUpdatePersonalData = () => {
 		try {
 			const response = await axiosInstance.put<TUpdatePersonalDataResponse>(
 				'/users/personalData',
-				{ [name]: value },
+				formValues,
 			);
 
 			// TODO возвращать или нет?

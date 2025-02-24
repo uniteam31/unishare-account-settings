@@ -14,4 +14,6 @@ export {
 	TextAlign,
 	//
 	Button,
+	//
+	Warning,
 } from '@uniteam31/uni-shared-ui';

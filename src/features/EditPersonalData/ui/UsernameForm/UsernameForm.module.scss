@@ -1,6 +1,9 @@
-.Form {
+.UsernameForm {
 	padding: var(--medium-indent);
 	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
 	.input {
 		height: 50px;

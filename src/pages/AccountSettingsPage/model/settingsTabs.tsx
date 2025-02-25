@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
+import { AuthenticationData } from 'widgets/AuthenticationData';
 import { PersonalData } from 'widgets/PersonalData';
-import { SecurityData } from 'widgets/SecurityData';
 
-export type TSettingTabName = 'personalData' | 'securityData';
+export type TSettingTabName = 'personalData' | 'authenticationData';
 
 type TSettingsTab = {
 	title: string;
@@ -14,8 +14,8 @@ export const settingsTabs: Record<TSettingTabName, TSettingsTab> = {
 		title: 'Персональные данные',
 		Component: <PersonalData />,
 	},
-	securityData: {
+	authenticationData: {
 		title: 'Пароли и безопасность',
-		Component: <SecurityData />,
+		Component: <AuthenticationData />,
 	},
 };

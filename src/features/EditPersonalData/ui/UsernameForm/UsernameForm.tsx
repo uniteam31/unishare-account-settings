@@ -46,7 +46,7 @@ export const UsernameForm = () => {
 				<Text
 					className={s.title}
 					title={'Имя пользователя'}
-					text={'Это ваше уникальное имя'}
+					text={'Это ваш уникальный псевдоним'}
 					align={TextAlign.CENTER}
 				/>
 

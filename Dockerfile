@@ -22,8 +22,8 @@ RUN yarn init -2
 COPY .npmrc /root/
 
 # CHECKOUT
-RUN git clone https://github.com/uniteam31/unishare-notes.git
-WORKDIR /unishare-notes
+RUN git clone https://github.com/uniteam31/unishare-account-settings.git
+WORKDIR /unishare-account-settings
 RUN git fetch --all
 RUN git pull
 RUN git checkout ${BRANCH}

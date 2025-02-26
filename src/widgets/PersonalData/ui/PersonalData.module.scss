@@ -1,0 +1,17 @@
+.PersonalData {
+	width: 100%;
+	height: 100%;
+
+	.avatar {
+		height: 70px;
+		width: 70px;
+		margin-bottom: var(--big-indent);
+	}
+
+	.fields {
+		display: flex;
+		flex-direction: column;
+		gap: var(--medium-indent);
+		margin-top: var(--big-indent);
+	}
+}

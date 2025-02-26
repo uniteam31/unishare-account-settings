@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { AccountSettings } from 'entities/AccountSettings';
 import { useGetAuthenticationData } from 'entities/AuthenticationData';
-import { Text } from 'shared/ui';
+import { Text, Warning } from 'shared/ui';
 import s from './AuthenticationData.module.scss';
 
 export const AuthenticationData = memo(() => {
@@ -16,6 +16,12 @@ export const AuthenticationData = memo(() => {
 			/>
 
 			<div className={s.fields}>
+				<Warning
+					theme={'blue'}
+					title={'Привет!'}
+					text={'В данный момент редактирование данных невозможно'}
+				/>
+
 				<AccountSettings.Field
 					label={'Личная почта'}
 					value={authenticationData.email}
@@ -28,7 +34,7 @@ export const AuthenticationData = memo(() => {
 					disabled
 				/>
 
-				<AccountSettings.Field label={'Изменить пароль'} value={''} disabled />
+				<AccountSettings.Field label={'Пароль'} value={'********'} disabled />
 			</div>
 		</div>
 	);

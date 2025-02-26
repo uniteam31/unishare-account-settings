@@ -16,4 +16,10 @@ export {
 	Button,
 	//
 	Warning,
+	//
+	Widget,
+	//
+	Link,
 } from '@uniteam31/uni-shared-ui';
+
+export { UpdateFormModal } from './UpdateFormModal';

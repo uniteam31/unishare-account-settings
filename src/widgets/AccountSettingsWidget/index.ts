@@ -1,1 +1,1 @@
-export { AccountSettingsWidget } from './ui/AccountSettingsWidget';
+export { AccountSettingsWidget as default } from './ui/AccountSettingsWidget';

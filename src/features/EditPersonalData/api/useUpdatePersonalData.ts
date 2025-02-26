@@ -36,6 +36,8 @@ export const useUpdatePersonalData = () => {
 				'Произошла неизвестная ошибка при входе в аккаунт';
 
 			setError(errorMessage);
+
+			throw new Error(errorMessage);
 		} finally {
 			setIsLoading(false);
 		}

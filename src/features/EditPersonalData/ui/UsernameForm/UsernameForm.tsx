@@ -1,7 +1,7 @@
 import { useController, useFormContext } from 'react-hook-form';
 import { useGetPersonalData } from 'entities/PersonalData';
 import type { TUsernameFormFields } from 'entities/PersonalData';
-import { Button, Input, Text, TextAlign } from 'shared/ui';
+import { Input, UpdateFormModal } from 'shared/ui';
 import { useUpdatePersonalData } from '../../api/useUpdatePersonalData';
 import s from './UsernameForm.module.scss';
 
@@ -14,8 +14,11 @@ export const UsernameForm = () => {
 		getValues,
 	} = useFormContext<TUsernameFormFields>();
 
-	// TODO добавить обработчики загрузок и ошибок
-	const { updatePersonalData, isLoading: isPersonalDataUpdating } = useUpdatePersonalData();
+	const {
+		updatePersonalData,
+		isLoading: isPersonalDataUpdating,
+		error: updatePersonalDataErrors,
+	} = useUpdatePersonalData();
 	const { personalData, mutatePersonalData } = useGetPersonalData();
 
 	const {
@@ -38,39 +41,28 @@ export const UsernameForm = () => {
 		updatePersonalData({ formValues }).then(() => updateCachedPersonalData());
 	};
 
-	// TODO добавить лоадеры и ошибки
-	// TODO вынести все общие стили форм
+	const handleReset = () => {
+		reset();
+	};
+
 	return (
-		<form className={s.UsernameForm} onSubmit={handleSubmitContext(handleSubmit)}>
-			<div>
-				<Text
-					className={s.title}
-					title={'Имя пользователя'}
-					text={'Это ваш уникальный псевдоним'}
-					align={TextAlign.CENTER}
-				/>
-
-				<Input
-					className={s.input}
-					label={'Имя пользователя'}
-					value={username}
-					onChange={onChangeUsername}
-				/>
-			</div>
-
-			<div className={s.buttonsWrapper}>
-				<Button className={s.submitButton} disabled={!isDirty || isPersonalDataUpdating}>
-					Обновить
-				</Button>
-
-				<Button
-					className={s.resetButton}
-					disabled={!isDirty || isPersonalDataUpdating}
-					onClick={() => reset()}
-				>
-					Сбросить
-				</Button>
-			</div>
-		</form>
+		<UpdateFormModal
+			title={'Имя пользователя'}
+			text={'Это ваш уникальный псевдоним'}
+			//
+			isLoading={isPersonalDataUpdating}
+			errors={updatePersonalDataErrors}
+			isDirty={isDirty}
+			//
+			onSubmit={handleSubmitContext(handleSubmit)}
+			onReset={handleReset}
+		>
+			<Input
+				className={s.input}
+				label={'Имя пользователя'}
+				value={username}
+				onChange={onChangeUsername}
+			/>
+		</UpdateFormModal>
 	);
 };

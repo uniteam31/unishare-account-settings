@@ -2,7 +2,7 @@ import { memo, useCallback, useState } from 'react';
 import { EditPersonalData } from 'features/EditPersonalData';
 import { AccountSettings } from 'entities/AccountSettings';
 import { useGetPersonalData } from 'entities/PersonalData';
-import { Avatar, Text } from 'shared/ui';
+import { Text } from 'shared/ui';
 import s from './PersonalData.module.scss';
 
 export const PersonalData = memo(() => {
@@ -26,8 +26,6 @@ export const PersonalData = memo(() => {
 
 	return (
 		<div className={s.PersonalData}>
-			<Avatar src={userAvatar} className={s.avatar} />
-
 			<Text
 				title={'Персональные данные'}
 				text={'Информация, которая видна каждому пользователю'}

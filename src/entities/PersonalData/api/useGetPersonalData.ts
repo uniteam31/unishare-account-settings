@@ -9,6 +9,7 @@ const DEFAULT_PERSONAL_DATA_VALUES: IPersonalData = {
 	lastName: '',
 	avatar: '',
 	username: '',
+	personalSpaceID: '',
 };
 
 type TGetPersonalDataResponse = ApiResponse<IPersonalData>;

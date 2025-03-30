@@ -8,7 +8,7 @@ type Props = {
 	formValues: TAvatarFormFields;
 };
 
-type Response = ApiResponse<IPersonalData>;
+type Response = ApiResponse<Pick<IPersonalData, 'avatar'>>;
 
 export const useUpdateUserAvatar = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,8 +28,12 @@ export const useUpdateUserAvatar = () => {
 			const formData = new FormData();
 			formData.append('avatar', formValues.avatar);
 
-			// TODO: ставить ссылку, которую возвращает сервер
-			await axiosInstance.put<Response>('/users/personalData/avatar', formData);
+			const response = await axiosInstance.put<Response>(
+				'/users/personalData/avatar',
+				formData,
+			);
+
+			return response.data.data;
 		} catch (error) {
 			const errorMessage =
 				getApiResponseErrorMessage(error) ||

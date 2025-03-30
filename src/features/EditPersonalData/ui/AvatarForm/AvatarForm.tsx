@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
-import { useGetPersonalData } from 'entities/PersonalData';
+import { IPersonalData, useGetPersonalData } from 'entities/PersonalData';
 import type { TAvatarFormFields } from 'entities/PersonalData';
 import { ImageInput, UpdateFormModal } from 'shared/ui';
 import { useUpdateUserAvatar } from '../../api/useUpdateUserAvatar';
@@ -47,7 +47,7 @@ export const AvatarForm = () => {
 		onChange(avatar);
 	};
 
-	const updateCachedAvatar = () => {
+	const updateCachedAvatar = (avatar: IPersonalData['avatar']) => {
 		mutatePersonalData((currentPersonalData) => {
 			if (!currentPersonalData) {
 				return;
@@ -55,14 +55,14 @@ export const AvatarForm = () => {
 
 			return {
 				...currentPersonalData,
-				avatar: preview,
+				avatar,
 			};
 		}).finally();
 	};
 
 	const handleSubmit = () => {
-		updateUserAvatar({ formValues: { avatar: value } }).then(() => {
-			updateCachedAvatar();
+		updateUserAvatar({ formValues: { avatar: value } }).then((response) => {
+			updateCachedAvatar(response?.avatar);
 		});
 	};
 

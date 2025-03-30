@@ -33,7 +33,7 @@ export const useUpdatePersonalData = () => {
 		} catch (error) {
 			const errorMessage =
 				getApiResponseErrorMessage(error) ||
-				'Произошла неизвестная ошибка при входе в аккаунт';
+				'Произошла неизвестная ошибка при обновлении данных пользователя';
 
 			setError(errorMessage);
 

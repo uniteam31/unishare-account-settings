@@ -2,19 +2,16 @@ import { memo, useCallback, useState } from 'react';
 import { EditPersonalData } from 'features/EditPersonalData';
 import { AccountSettings } from 'entities/AccountSettings';
 import { useGetPersonalData } from 'entities/PersonalData';
-import { Text } from 'shared/ui';
+import { Text, Avatar } from 'shared/ui';
 import s from './PersonalData.module.scss';
 
 export const PersonalData = memo(() => {
 	const [isNameModalOpen, setIsNameModalOpen] = useState(false);
 	const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
+	const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
 	// TODO обработать
 	const { personalData, isLoading, error } = useGetPersonalData();
-
-	// TODO расхардкодить
-	const userAvatar =
-		'https://avatars.mds.yandex.net/i?id=29f7366ac823f46165612d9480e60f0e_l-13215132-images-thumbs&n=13';
 
 	const handleNameModal = useCallback(() => {
 		setIsNameModalOpen((prev) => !prev);
@@ -24,14 +21,24 @@ export const PersonalData = memo(() => {
 		setIsUsernameModalOpen((prev) => !prev);
 	}, []);
 
+	const handleAvatarModal = useCallback(() => {
+		setIsAvatarModalOpen((prev) => !prev);
+	}, []);
+
 	return (
 		<div className={s.PersonalData}>
 			<Text
 				title={'Персональные данные'}
-				text={'Информация, которая видна каждому пользователю'}
+				text={'Для редактирования кликните на нужное поле'}
 			/>
 
 			<div className={s.fields}>
+				<Avatar
+					onClick={handleAvatarModal}
+					src={personalData.avatar}
+					className={s.avatar}
+				/>
+
 				<AccountSettings.Field
 					label={'Имя пользователя'}
 					value={personalData.username}
@@ -55,6 +62,13 @@ export const PersonalData = memo(() => {
 				<EditPersonalData.UsernameModal
 					isOpen={isUsernameModalOpen}
 					onClose={handleUsernameModal}
+				/>
+			)}
+
+			{isAvatarModalOpen && (
+				<EditPersonalData.AvatarModal
+					isOpen={isAvatarModalOpen}
+					onClose={handleAvatarModal}
 				/>
 			)}
 		</div>
